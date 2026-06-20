@@ -2,7 +2,6 @@
 /public/
 /resources/
 /.hugo_build.lock
-hugo
 
 # IDE
 .idea/
