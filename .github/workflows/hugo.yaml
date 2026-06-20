@@ -11,12 +11,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: group: 'pages'
- cancel-in-progress: false
+  group: 'pages'
+  cancel-in-progress: false
 
 defaults:
   run:
- shell: bash
+    shell: bash
 
 jobs:
   build:
