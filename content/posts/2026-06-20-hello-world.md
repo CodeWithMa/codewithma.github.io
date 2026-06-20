@@ -1,7 +1,7 @@
-+++
-date = '2026-06-20T09:44:23'
-title = 'Hello World'
-+++
+---
+date: 2026-06-20T09:44:23
+title: Hello World
+---
 
 Welcome to my new Hugo blog! This is my first post.
 

@@ -1,8 +1,7 @@
-+++
-date = '2026-06-20T09:45:17+02:00'
-draft = false
-title = 'About'
-+++
+---
+date: 2026-06-20T09:45:17+02:00
+title: About
+---
 
 Hi! I'm a software developer passionate about building great software.
 
