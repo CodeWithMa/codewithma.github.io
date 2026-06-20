@@ -7,10 +7,3 @@ title = 'About'
 Hi! I'm a software developer passionate about building great software.
 
 This blog is where I share my thoughts, tutorials, and experiences in software development.
-
-## Skills
-
-- Go, Python, JavaScript/TypeScript
-- Cloud infrastructure (AWS, GCP)
-- DevOps & CI/CD
-- Distributed systems
