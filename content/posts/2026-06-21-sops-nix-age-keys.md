@@ -1,6 +1,6 @@
 ---
 date: 2026-06-21T11:43:12
-title: NixOS, sops-nix and age keys
+title: "NixOS, sops-nix and age keys"
 ---
 
 Heavily based on this epic blog post https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/ by Michael Stapelberg.
