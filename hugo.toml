@@ -1,0 +1,29 @@
+baseURL = 'https://codewithma.github.io/'
+title = 'codewithma.github.io'
+theme = 'PaperMod'
+
+[params]
+  homeInfoParams = { Title = "My beautiful blog", Content = "Welcome to my blog!" }
+  socialIcons = [
+    { name = "github", url = "https://github.com/codewithma" }
+  ]
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 20
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
