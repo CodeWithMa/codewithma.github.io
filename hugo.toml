@@ -15,10 +15,15 @@ theme = 'PaperMod'
     url = "/posts/"
     weight = 10
   [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 20
+  [[menu.main]]
     identifier = "about"
     name = "About"
     url = "/about/"
-    weight = 20
+    weight = 30
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
