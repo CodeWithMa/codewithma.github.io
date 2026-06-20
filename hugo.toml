@@ -5,7 +5,8 @@ theme = 'PaperMod'
 [params]
   homeInfoParams = { Title = "My beautiful blog", Content = "Welcome to my blog!" }
   socialIcons = [
-    { name = "github", url = "https://github.com/codewithma" }
+    { name = "github", url = "https://github.com/CodeWithMa" },
+    { name = "codeberg", url = "https://codeberg.org/CodeWithMa" }
   ]
 
 [menu]
