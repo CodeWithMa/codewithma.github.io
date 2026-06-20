@@ -1,6 +1,5 @@
 +++
-date = '2026-06-20T09:44:23+02:00'
-draft = false
+date = '2026-06-20T09:44:23'
 title = 'Hello World'
 +++
 
