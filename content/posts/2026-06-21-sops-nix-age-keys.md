@@ -65,6 +65,12 @@ If the secret file is new you can create it on any system with `sops`.
 sops ./hosts/nixos-server/secrets/example.yml
 ```
 
+Content of my unencrypted `example.yml`.
+
+``` yaml
+api-key: hello i use arch btw
+```
+
 ## Edit secret on server.
 
 What i came up with was
@@ -84,6 +90,109 @@ SOPS_AGE_KEY_CMD="sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key"
 
 Your `$EDITOR` will be openend and you can edit the secret.
 
+## Multiple secret files
+
+I added a second secret file.
+
+``` shell
+sops ./hosts/nixos-server/secrets/example2.yml
+```
+
+Content of my unencrypted `example2.yml`.
+
+``` yaml
+example_key_level1:
+    example_key_level2:
+        example_key_level3: value-in-3
+```
+
 ## Add sops-nix to nixos
 
-TOOD
+Now lets add sops-nix to our nixos configuration.
+
+### flake.nix
+
+Add sops-nix to inputs, outputs and to the modules of the system you wanna use it on.
+
+``` nix
+{
+  description = "Multi-machine NixOS configuration";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { self, nixpkgs, disko, sops-nix, ... }: {
+    nixosConfigurations = {
+      nixos-applications = nixpkgs.lib.nixosSystem {
+        modules = [ ./hosts/nixos-applications/default.nix ];
+      };
+      nixos-server = nixpkgs.lib.nixosSystem {
+        modules = [
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          ./hosts/nixos-server/default.nix
+        ];
+      };
+    };
+  };
+}
+```
+
+### secrets.nix
+
+Create a new file `secrets.nix` and import it on your system on which the secret will be used.
+
+``` nix
+{ config, lib, pkgs, ... }:
+
+{
+  sops = {
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets = {
+      "api-key" = {
+        sopsFile = ./secrets/example.yml;
+      };
+      "example_key_level1/example_key_level2/example_key_level3" = {
+        sopsFile = ./secrets/example2.yml;
+      };
+    };
+  };
+}
+```
+
+## Rebuild
+
+``` shell
+sudo nixos-rebuild switch
+```
+
+## Server /run/secrets
+
+The secrets are now available under `/run/secrets`.
+
+``` shell
+sudo cat /run/secrets/api-key
+```
+
+```
+hello i use arch btw
+```
+
+``` shell
+sudo cat /run/secrets/example_key_level1/example_key_level2/example_key_level3
+```
+
+```
+value-in-3
+```
